@@ -84,8 +84,7 @@ export default class LoginViewController extends Component<Props> {
                         }}
                         // onPress={this.click}
                     >
-
-                        <Text >登录遇到问题?</Text>
+                        <Text style={{ color:'#757575',}} >登录遇到问题?</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -98,8 +97,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         // alignItems: 'flex-start',
-        // backgroundColor: '#F5FCFF',
-        backgroundColor: 'white',
+        backgroundColor: '#FFFFFF',
+        // backgroundColor: 'white',
     },
     exitImg: {
         width: 20,
@@ -136,7 +135,7 @@ const styles = StyleSheet.create({
         // backgroundColor:'red',
     },
     line: {
-        height: 0.5,
+        height: 1,
         marginTop: 5,
         marginRight: 20,
         marginLeft: 20,
@@ -144,7 +143,7 @@ const styles = StyleSheet.create({
         // position:'absolute',    //absolute 下 bottom ,right 才有效果
         // left: 0,
         // right: 20,
-        backgroundColor: 'gray',
+        backgroundColor: '#F6F6F6',
     },
     passWord: {
         marginLeft: 20,
