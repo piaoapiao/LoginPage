@@ -9,14 +9,31 @@ import {
     Alert,
     TouchableHighlight,
     TouchableOpacity,
+
 } from 'react-native';
 
 
 type Props = {};
 export default class LoginViewController extends Component<Props> {
 
+    constructor(props)
+    {
+        super(props);
+          this.click = this.click.bind(this);
+    }
+
     click() {
-        Alert.alert('hello');
+
+        // console.log('----');
+        // console.log(this);
+        // Alert.alert('hello');
+
+        this.props.navigator.push(
+            {
+                component: LoginViewController,
+                title: 'LoginViewController',
+                passProps: {myProp: 'genius'}
+            });
     }
 
     // const clickProblemBtn = () => {
@@ -39,11 +56,27 @@ export default class LoginViewController extends Component<Props> {
 
                 <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
 
-                    <Image style={styles.exitImg}
-                           source={require('./images/new_navClose.png')}/>
-                    <Text style={styles.register}>
-                        注册
-                    </Text>
+                    <TouchableOpacity onPress={() =>{
+                        Alert.alert("exit");
+                        }
+                    }>
+
+                        <Image style={styles.exitImg}
+                             source={require('./images/new_navClose.png')}/>
+
+
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        onPress={() => {
+                            Alert.alert("register");
+                            }
+                        }
+                    >
+                        <Text style={styles.register}>
+                            注册
+                        </Text>
+                    </TouchableOpacity>
 
                 </View>
 
@@ -64,10 +97,15 @@ export default class LoginViewController extends Component<Props> {
                 <View style={styles.line}/>
 
                 <TouchableOpacity style={styles.loginView}
-                                  onPress={() =>{
-                                      Alert.alert('problem!');
-                                  }}
-                    // onPress={this.click}
+
+                                   onPress={this.click}
+                                  //     this.props.navigator.push(
+                                  //         {
+                                  //             component: LoginViewController,
+                                  //             title: 'LoginViewController',
+                                  //             passProps: {myProp: 'genius'}
+                                  //         });
+                                  // }}
                 >
                     <Text style={{color:'white', marginTop:11, textAlign:'center', flex:1,}}>登录</Text>
 
