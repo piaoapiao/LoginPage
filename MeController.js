@@ -19,7 +19,7 @@ export default class MeController extends Component<Props> {
 
     constructor(props) {
         super(props);
-         this.click = this.click.bind(this);
+         // this.click = this.click.bind(this);
         this.data = [{icon: require('./images/me2.png'),title:'设置'},{icon:require('./images/me1.png'), title:'我要还款'}];
     }
 
@@ -34,14 +34,16 @@ export default class MeController extends Component<Props> {
     // }
 
     click =  (id) =>{
-        Alert.alert(id);
+        Alert.alert(id.toString());
     };
 
     _renderItem = ({item,index}) => {
         return (
             <MeItem
                 icon={item.icon}
+                id={index}
                 title={item.title}
+                onPress={this.click}
             />
         )
     }
@@ -67,10 +69,14 @@ class MeItem extends  Component<props>{
         super(props);
     }
 
+    _onPress = () =>{
+        this.props.onPress(this.props.id);
+    }
+
     render()
     {
         return (
-            <TouchableOpacity onPress={self.click}>
+            <TouchableOpacity onPress={this._onPress}>
                 <View style={{height : 60, flexDirection:'row'}}>
                     <Image style={{width : 20, height:20,marginLeft:20,alignItems:'center',}}
                            source={this.props.icon}
@@ -86,6 +92,5 @@ class MeItem extends  Component<props>{
             </TouchableOpacity>
         );
     }
-
 
 }
