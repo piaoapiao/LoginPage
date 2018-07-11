@@ -34,8 +34,18 @@ export default class MeController extends Component<Props> {
     // }
 
     click =  (id) =>{
+        this.test$()
         Alert.alert(id.toString());
     };
+
+    test$ = () =>{
+        subKey = ''
+        storeKey = 'store'
+        const subscriptionKey = subKey || `${storeKey}Subscription`
+        console.log(subscriptionKey);
+        // console.log(subscriptionKey);
+    }
+
 
     _renderItem = ({item,index}) => {
         return (

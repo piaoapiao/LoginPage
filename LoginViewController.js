@@ -20,6 +20,15 @@ export default class LoginViewController extends Component<Props> {
     {
         super(props);
           this.click = this.click.bind(this);
+          this.state = {
+              userName :'',
+              password :'',
+          }
+    }
+
+    setUserName(newUserName)
+    {
+        this.setState({userName:newUserName})
     }
 
     click() {
@@ -27,6 +36,34 @@ export default class LoginViewController extends Component<Props> {
         // console.log('----');
         // console.log(this);
         // Alert.alert('hello');
+
+        Alert.alert(this.state.userName + ":" + this.state.password );
+        return;
+
+        const container = {
+            'setting': 'setting',
+            'borrowDetails': 'borrowDetails',
+            'repayDetails': 'borrowDetails',
+            'resetLoginPassword': 'resetLoginPassword',
+            'wantRepayment': 'wantRepayment',
+        };
+
+        Object.keys(container).forEach((key) => {
+            console.log(key);
+        });
+
+
+        function msgAfterTimeout (msg, who, timeout) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => resolve(`${msg} Hello ${who}!`), timeout)
+            })
+        }
+        msgAfterTimeout("", "Foo", 100).then((msg) =>
+            msgAfterTimeout(msg, "Bar", 200)
+        ).then((msg) => {
+            console.log(`done after 300ms:${msg}`)
+        })
+
 
         this.props.navigator.push(
             {
@@ -42,7 +79,16 @@ export default class LoginViewController extends Component<Props> {
 
 
 
-    render() {
+
+
+
+
+// });
+
+
+
+
+render() {
         return (
             <View style={styles.container}>
 
@@ -85,6 +131,8 @@ export default class LoginViewController extends Component<Props> {
                        source={require('./images/logo.png')}/>
 
                 <TextInput style={styles.phoneNumber}
+                    onChangeText={ (phoneNumber) => this.setUserName(phoneNumber)}
+
                            placeholder="请输入手机号/用户名"
                 />
 
@@ -92,6 +140,7 @@ export default class LoginViewController extends Component<Props> {
 
                 <TextInput style={styles.passWord}
                            placeholder="请输入登录密码"
+                           onChangeText={(pd) => { this.setState({password:pd}) }}
                 />
 
                 <View style={styles.line}/>
