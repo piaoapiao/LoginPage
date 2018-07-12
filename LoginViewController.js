@@ -9,6 +9,7 @@ import {
     Alert,
     TouchableHighlight,
     TouchableOpacity,
+    AsyncStorage,
 
 } from 'react-native';
 
@@ -26,6 +27,34 @@ export default class LoginViewController extends Component<Props> {
           }
     }
 
+    componentWillMount() {
+         // super();
+
+
+        AsyncStorage.getItem('userName',(error,result) => {
+            if (error){
+                alert('取值失败:'+error);
+            }else{
+                // alert('取值成功:'+result);
+                this.setState({userName:result});
+            }
+        })
+
+
+        AsyncStorage.getItem('password',(error,result) => {
+            if (error){
+                alert('取值失败:'+error);
+            }else{
+                // alert('取值成功:'+result);
+                this.setState({password:result});
+            }
+        })
+
+        // this.setState({userName:AsyncStorage.getItem('userName')});
+        // this.setState({password:AsyncStorage.getItem('password')});
+        // Alert.alert(this.state.userName + ":" + this.state.password );
+    }
+
     setUserName(newUserName)
     {
         this.setState({userName:newUserName})
@@ -37,7 +66,14 @@ export default class LoginViewController extends Component<Props> {
         // console.log(this);
         // Alert.alert('hello');
 
-        Alert.alert(this.state.userName + ":" + this.state.password );
+        AsyncStorage.setItem('userName',this.state.userName);
+        AsyncStorage.setItem('password',this.state.password);
+
+         name = AsyncStorage.getItem('userName',)
+
+
+
+        // Alert.alert(AsyncStorage.getItem('userName') + ":" + this.state.password );
         return;
 
         const container = {
@@ -132,7 +168,7 @@ render() {
 
                 <TextInput style={styles.phoneNumber}
                     onChangeText={ (phoneNumber) => this.setUserName(phoneNumber)}
-
+                           value={this.state.userName}
                            placeholder="请输入手机号/用户名"
                 />
 
@@ -140,6 +176,7 @@ render() {
 
                 <TextInput style={styles.passWord}
                            placeholder="请输入登录密码"
+                           value={this.state.password}
                            onChangeText={(pd) => { this.setState({password:pd}) }}
                 />
 
